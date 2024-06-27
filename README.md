@@ -2,5 +2,6 @@
 
 Hi! This is from Rohit
 
-Teaching Lazy git
+Hi! This is from Alex
 
+Rohit is teaching us about lazygit!
