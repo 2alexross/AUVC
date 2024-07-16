@@ -1,0 +1,189 @@
+<mujoco model="a1_description">
+    <compiler angle="radian"/>
+    <option gravity='0 0 -9.806' timestep='0.001'/>
+
+    <default>
+        <light castshadow="true" diffuse="1 1 1"/>
+        <motor ctrlrange="-33.5 33.5" ctrllimited="true"/>
+        <camera fovy="60"/>
+        <joint damping="0.01" armature="0.01" frictionloss="0.2" />
+    </default>
+
+    <asset>
+        <mesh name="sub_mesh" scale="0.05 0.05 0.05" file="bluerov2.obj" />
+        <mesh name="ccw_prop_mesh" file="t200_ccw_prop.obj" />
+        <mesh name="cw_prop_mesh" file="t200_cw_prop.obj" />
+    </asset>
+
+    <asset>
+        <texture type="skybox" builtin="gradient" rgb1="0.3 0.3 0.3" rgb2="1.0 1.0 1.0" width="512" height="512"/>
+        <!-- <texture name="plane" type="2d" builtin="flat" rgb1="0.1 0.1 0.1" width="512" height="512" mark="cross" markrgb="0 0 0"/> -->
+        <!-- <material name="plane" reflectance="0.0" texture="plane" texrepeat="3 3" texuniform="true"/> -->
+        <!-- <texture name="plane_tex" type="2d" builtin="checker" width="512" height="512" rgb1=".1 .2 .3" rgb2=".2 .3 .4"/> -->
+        <!-- <material name="plane" texture="plane_tex" texrepeat="1 1" texuniform="true" reflectance=".2"/> -->
+        <texture name="floor_and_wall_tex" type="2d" width="1" file="pool_walls.png" height="1"/>
+        <material name="floor_and_wall" texture="floor_and_wall_tex" texrepeat="1 1" texuniform="true" reflectance=".01"/>
+
+        <texture name="ar_tag_0_tex" type="2d" width="1" file="36_11_tags/tag36_11_00000.png" height="1"/>
+        <material name="ar_tag_0_mat" texture="ar_tag_0_tex" texrepeat="10 10" texuniform="true" reflectance=".01"/>
+        <texture name="ar_tag_1_tex" type="2d" width="1" file="36_11_tags/tag36_11_00001.png" height="1"/>
+        <material name="ar_tag_1_mat" texture="ar_tag_1_tex" texrepeat="10 10" texuniform="true" reflectance=".01"/>
+        <texture name="ar_tag_2_tex" type="2d" width="1" file="36_11_tags/tag36_11_00002.png" height="1"/>
+        <material name="ar_tag_2_mat" texture="ar_tag_2_tex" texrepeat="10 10" texuniform="true" reflectance=".01"/>
+        <texture name="ar_tag_3_tex" type="2d" width="1" file="36_11_tags/tag36_11_00003.png" height="1"/>
+        <material name="ar_tag_3_mat" texture="ar_tag_3_tex" texrepeat="10 10" texuniform="true" reflectance=".01"/>
+        <texture name="ar_tag_4_tex" type="2d" width="1" file="36_11_tags/tag36_11_00004.png" height="1"/>
+        <material name="ar_tag_4_mat" texture="ar_tag_4_tex" texrepeat="10 10" texuniform="true" reflectance=".01"/>
+        <texture name="ar_tag_5_tex" type="2d" width="1" file="36_11_tags/tag36_11_00005.png" height="1"/>
+        <material name="ar_tag_5_mat" texture="ar_tag_5_tex" texrepeat="10 10" texuniform="true" reflectance=".01"/>
+        <texture name="ar_tag_6_tex" type="2d" width="1" file="36_11_tags/tag36_11_00006.png" height="1"/>
+        <material name="ar_tag_6_mat" texture="ar_tag_6_tex" texrepeat="10 10" texuniform="true" reflectance=".01"/>
+        <texture name="ar_tag_7_tex" type="2d" width="1" file="36_11_tags/tag36_11_00007.png" height="1"/>
+        <material name="ar_tag_7_mat" texture="ar_tag_7_tex" texrepeat="10 10" texuniform="true" reflectance=".01"/>
+        <texture name="ar_tag_8_tex" type="2d" width="1" file="36_11_tags/tag36_11_00008.png" height="1"/>
+        <material name="ar_tag_8_mat" texture="ar_tag_8_tex" texrepeat="10 10" texuniform="true" reflectance=".01"/>
+    </asset>
+
+    <visual>
+        <rgba com="1.502 1.0 0 0.5" contactforce="1.98 0.4 0.4 0.7" contactpoint="1.0 1.0 0.6 0.4"/>
+        <scale com="0.2" forcewidth="0.035" contactwidth="0.10" contactheight="0.04"/>
+    </visual>
+
+  <default>
+      <default class='ar_tag_class'>
+        <geom euler="0 1.57 0" size="0.1 0.1 0.1" type="plane" />
+      </default>
+      <default class='floor_lines'>
+        <geom type="plane" size="25 0.2 0.02" rgba="0 0 0 1" contype="0" conaffinity="0"/>
+      </default>
+      <default class='pool_walls_and_walls'>
+         <geom type="plane" material="floor_and_wall"/>
+      </default>
+      <default class='pool_cross'>
+      <geom type="plane" size=".2 .7 .7" rgba="0 0 0 1" contype="0" conaffinity="0"/>
+      </default>
+  </default>
+
+  <worldbody>
+      <light directional="true" diffuse=".8 .8 .8" pos="0 0 10" dir="0 0 -10"/>
+      <camera name="camera1" mode="trackcom" pos="0 -1.3 1.6" xyaxes="1 0 0 0 0.707 0.707"/>
+
+      <geom name="ar_tag0" class="ar_tag_class"  pos="-2 0 1" material="ar_tag_0_mat"/>
+      <geom name="ar_tag1" class="ar_tag_class"  pos="-2 1 1" material="ar_tag_1_mat"/>
+      <geom name="ar_tag2" class="ar_tag_class"  pos="-2 2 1" material="ar_tag_2_mat"/>
+      <geom name="ar_tag3" class="ar_tag_class"  pos="-2 3 1" material="ar_tag_3_mat"/>
+      <geom name="ar_tag4" class="ar_tag_class"  pos="-2 4 1" material="ar_tag_4_mat"/>
+      <geom name="ar_tag5" class="ar_tag_class"  pos="-2 5 1" material="ar_tag_5_mat"/>
+      <geom name="ar_tag6" class="ar_tag_class"  pos="-2 6 1" material="ar_tag_6_mat"/>
+      <geom name="ar_tag7" class="ar_tag_class"  pos="-2 7 1" material="ar_tag_7_mat"/>
+      <geom name="ar_tag8" class="ar_tag_class"  pos="-2 8 1" material="ar_tag_8_mat"/>
+
+      <geom name="pool_floor"      class="pool_walls_and_walls" euler="0 0 0" pos="0 0 0" size="25 12.5 .01"/>
+      <geom name="pool_right_wall" class="pool_walls_and_walls" euler="1.57 0 1.57" pos="0 12.5 1" size="1 25 12.5" />
+      <geom name="pool_left_wall"  class="pool_walls_and_walls" euler="-1.57 0 1.57" pos="0 -12.5 1" size="1 25 12.5"/>
+      <geom name="pool_front_wall" class="pool_walls_and_walls" euler="0 -1.57 0" pos="25 0 1" size="1 12.5 0.1" />
+      <geom name="pool_rear_wall"  class="pool_walls_and_walls" euler="0 1.57 0" pos="-25 0 1" size="1 12.5 12.5"/>
+
+      <!-- <geom name="lane0" type="plane" pos="0 12.5 0.001" size="25 0.1 0.02" rgba="0 0 0 1" contype="0" conaffinity="0"/> --> <!-- Edge lane 1 -->
+      <geom name="lane1" pos="0 10 0.001" class="floor_lines" />
+      <geom name="lane2" pos="0 7.5 0.001" class="floor_lines"/>
+      <geom name="lane3" pos="0 5 0.001" class="floor_lines"/>
+      <geom name="lane4" pos="0 2.5 0.001" class="floor_lines"/>
+      <geom name="lane5" pos="0 0 0.001" class="floor_lines"/>
+      <!-- <geom name="lane6" type="plane" pos="0 -12.5 0.001" size="25 0.1 0.02" rgba="0 0 0 1" contype="0" conaffinity="0"/> --><!-- Edge lane 2 -->
+      <geom name="lane7"  class="floor_lines" pos="0 -10 0.001" />
+      <geom name="lane8"  class="floor_lines" pos="0 -7.5 0.001"/>
+      <geom name="lane9"  class="floor_lines" pos="0 -5 0.001" />
+      <geom name="lane10" class="floor_lines" pos="0 -2.5 0.001" />
+
+      <geom euler="0 -1.57 0"    class="pool_cross" pos="-24.99 0 1" />
+      <geom euler="0 -1.57 1.57" class="pool_cross" pos="-24.99 0 1" />
+      <geom euler="0 -1.57 0"    class="pool_cross" pos="-24.99 2.5 1" />
+      <geom euler="0 -1.57 1.57" class="pool_cross" pos="-24.99 2.5 1" />
+      <geom euler="0 -1.57 0"    class="pool_cross" pos="-24.99 5 1" />
+      <geom euler="0 -1.57 1.57" class="pool_cross" pos="-24.99 5 1" />
+      <geom euler="0 -1.57 0"    class="pool_cross" pos="-24.99 7.5 1" />
+      <geom euler="0 -1.57 1.57" class="pool_cross" pos="-24.99 7.5 1" />
+      <geom euler="0 -1.57 0"    class="pool_cross" pos="-24.99 10 1" />
+      <geom euler="0 -1.57 1.57" class="pool_cross" pos="-24.99 10 1" />
+      <geom euler="0 -1.57 0"    class="pool_cross" pos="-24.99 -2.5 1" />
+      <geom euler="0 -1.57 1.57" class="pool_cross" pos="-24.99 -2.5 1" />
+      <geom euler="0 -1.57 0"    class="pool_cross" pos="-24.99 -5 1" />
+      <geom euler="0 -1.57 1.57" class="pool_cross" pos="-24.99 -5 1" />
+      <geom euler="0 -1.57 0"    class="pool_cross" pos="-24.99 -7.5 1" />
+      <geom euler="0 -1.57 1.57" class="pool_cross" pos="-24.99 -7.5 1" />
+      <geom euler="0 -1.57 0"    class="pool_cross" pos="-24.99 -10 1" />
+      <geom euler="0 -1.57 1.57" class="pool_cross" pos="-24.99 -10 1" />
+
+      <geom euler="0 -1.57 0"    class="pool_cross" pos="24.99 0 1" />
+      <geom euler="0 -1.57 1.57" class="pool_cross" pos="24.99 0 1" />
+      <geom euler="0 -1.57 0"    class="pool_cross" pos="24.99 2.5 1" />
+      <geom euler="0 -1.57 1.57" class="pool_cross" pos="24.99 2.5 1" />
+      <geom euler="0 -1.57 0"    class="pool_cross" pos="24.99 5 1" />
+      <geom euler="0 -1.57 1.57" class="pool_cross" pos="24.99 5 1" />
+      <geom euler="0 -1.57 0"    class="pool_cross" pos="24.99 7.5 1" />
+      <geom euler="0 -1.57 1.57" class="pool_cross" pos="24.99 7.5 1" />
+      <geom euler="0 -1.57 0"    class="pool_cross" pos="24.99 10 1" />
+      <geom euler="0 -1.57 1.57" class="pool_cross" pos="24.99 10 1" />
+      <geom euler="0 -1.57 0"    class="pool_cross" pos="24.99 -2.5 1" />
+      <geom euler="0 -1.57 1.57" class="pool_cross" pos="24.99 -2.5 1" />
+      <geom euler="0 -1.57 0"    class="pool_cross" pos="24.99 -5 1" />
+      <geom euler="0 -1.57 1.57" class="pool_cross" pos="24.99 -5 1" />
+      <geom euler="0 -1.57 0"    class="pool_cross" pos="24.99 -7.5 1" />
+      <geom euler="0 -1.57 1.57" class="pool_cross" pos="24.99 -7.5 1" />
+      <geom euler="0 -1.57 0"    class="pool_cross" pos="24.99 -10 1" />
+      <geom euler="0 -1.57 1.57" class="pool_cross" pos="24.99 -10 1" />
+
+        <!-- <body name="water" pos="0 0 2" euler="0 0 0"> -->
+        <!--     <geom name="water_geom" type="box" size="25 12.5 2" rgba="0.2 0.2 0.8 0.2" contype="0" conaffinity="0"/> -->
+        <!-- </body> -->
+        <!-- Every 2.5m there is 1 lanes -->
+
+        <!-- full sub dimensions: 18 in x 13.3 in x 10 in-->
+        <body name="sub" pos="0 0 1" euler="1.57 3.14 0">
+            <freejoint/>
+            <geom name="box" type="mesh" rgba="0.9 0.9 0.8 1" mesh="sub_mesh" size="0.4572 0.33782 0.254" mass="9" />
+            <camera name="sub_track_cam" mode="track" pos="1 0 0"/>
+            <body name="camera_link1" euler="0 3.14 0" pos="0.32 0.45 0">
+                <geom name="camera_cylinder" type="cylinder" size="0.04 0.030" pos="0 0 0" rgba="1 1 0 1"/>
+                <joint type="hinge" axis="0 1 0"/>
+                <body name="camera_link2" euler="0 0 0" pos="-0.2 0 0">
+                    <!-- <geom name="camera_cylinder2" type="cylinder" size="0.04 0.030" pos="0 0 0" rgba="1 0 0 1"/> -->
+                    <camera name="sub_front_cam" mode="fixed" euler="0 1.57 0" pos="0 0 0" fovy="45"/>
+                    </body>
+                </body>
+            <!-- <camera name="sub_tracking_cam" mode="fixed" pos="0 1 0"/> -->
+            <!-- <light pos="-1 0 3" dir="1 0 -3" mode="trackcom"/> -->
+            <!-- The mass of the weight was chosen to be slightly bigger than the total buoyancy of the balloons. -->
+            <site name="imu" pos="0 0 0"/>
+        </body>
+
+        <!-- <body name="reference_box" pos="0 0 1"> -->
+            <!-- <geom name="refe_box_geom" size="0.4572 0.33782 0.254" type="box" rgba=" 0.9 0.8 0.8 0.2" mass="9" /> -->
+            <!-- <light pos="-1 0 3" dir="1 0 -3" mode="trackcom"/> -->
+            <!-- The mass of the weight was chosen to be slightly bigger than the total buoyancy of the balloons. -->
+        <!-- </body> -->
+
+
+        <!-- <body name="body" pos="0 0 0.4"> -->
+        <!--     <inertial pos="0 0 0" quat="0 0 0 1" mass="12"/> -->
+        <!--     <joint type="free" /> -->
+        <!--     <site name="imu" pos="0 0 0"/> -->
+        <!--     <geom type="mesh" rgba="0.9 0.9 0.8 1" mesh="body" /> -->
+        <!--     <body name="thruster1" pos="0 0 1"> -->
+        <!--         <inertial pos="0 0 0" quat="0 0 0 1" mass="0.5"/> -->
+        <!--         <joint type="hinge" /> -->
+        <!--         <geom type="mesh" rgba="0.9 0.9 0.8 1" mesh="body" /> -->
+        <!--     </body> -->
+        <!-- </body> -->
+    </worldbody>
+    <!-- <actuator> -->
+    <!-- </actuator> -->
+
+    <sensor>
+        <accelerometer name="body" site="imu"/>
+        <gyro name="Body_Gyro" site="imu"/>
+        <framepos name="Body_Pos" objtype="site" objname="imu"/>
+        <framequat name="Body_Quat" objtype="site" objname="imu"/>
+    </sensor>
+</mujoco>
