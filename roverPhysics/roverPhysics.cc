@@ -12,6 +12,7 @@ extern "C" int roverPhysicsInitPlug(mjModel *m, mjData *d) {
 }
 
 extern "C" bool roverPhysicsUpdatePlug(mjModel *m, mjData *d) {
-    printf("Update Rover Plug!\n");
+    printf("Physics Plug!\n");
+    // printf("Updated Physics Plug!\n");
   return true;
 }

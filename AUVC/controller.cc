@@ -12,6 +12,7 @@ extern "C" int controllerInitPlug(mjModel *m, mjData *d) {
 }
 
 extern "C" bool controllerUpdatePlug(mjModel *m, mjData *d) {
-    printf(" #######3 Update Plug!\n");
+    printf("Controller Plug!\n");
+    // printf("Updated Controller Plug!\n");
   return true;
 }
