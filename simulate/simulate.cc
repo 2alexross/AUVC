@@ -598,8 +598,6 @@ void ShowSubCAM(mj::Simulate* sim, mjrRect rect, mjvScene* scn, mjvOption* opt, 
   // glDrawPixels(viewport.width, viewport.height, GL_BGR, GL_UNSIGNED_BYTE, color_buffer);
   mjr_readPixels(color_buffer, depth_buffer,viewport, &sim->platform_ui->mjr_context());
 
-  // cv::waitKey(0);
-
   // float range = max_depth - min_depth;
   for (int i = 0; i < viewport.height * viewport.width; i++) {
     depth8[3 * i] = depth8[3 * i + 1] = depth8[3 * i + 2] = depth_buffer[i] * 255;
@@ -613,6 +611,7 @@ void ShowSubCAM(mj::Simulate* sim, mjrRect rect, mjvScene* scn, mjvOption* opt, 
   // printf("doing!");
   // cv::imwrite("/home/rohit/rgb_img.jpg", cv_gray_buffer);
   // cv::cvtColor(cv_gray_buffer, cv_gray_buffer, cv::COLOR_RGB2GRAY, 0);
+  // cv::waitKey(0);
 
   // for (int i = 0; i < cv_gray_buffer.rows*cv_gray_buffer.cols; i++) {
   //   depth_buffer[i] = (float)(cv_gray_buffer.data[i]);
@@ -626,11 +625,6 @@ void ShowSubCAM(mj::Simulate* sim, mjrRect rect, mjvScene* scn, mjvOption* opt, 
 
   mjr_drawPixels(color_buffer, nullptr, viewport, &sim->platform_ui->mjr_context());
   // glDrawPixels(viewport.width, viewport.height, GL_BGR, GL_UNSIGNED_BYTE, color_buffer);
-
-  // free(color_buffer);
-  // free(gray_buffer);
-  // free(depth_buffer);
-  // free(depth8);
 }
 
 // load state from history buffer
@@ -2265,14 +2259,6 @@ void Simulate::LoadMessageClear(void) {
   }
 }
 
-// void call_time(const char* message){
-//   time_t raw_time;
-//   struct tm* time_info;
-//   time(&raw_time);
-//   time_info = localtime(&raw_time);
-//   printf("[INFO] : (%02d:%02d:%02d) : %s", time_info->tm_hour, time_info->tm_min, time_info->tm_sec, message);
-// }
-
 /*** AUVC ***/
 bool Simulate::reloadControllerLibPlug(mjModel* m, mjData* d, bool test, bool load_dll){
     if(libcontroller != NULL) {dlclose(libcontroller);}
@@ -2675,6 +2661,48 @@ void Simulate::Render() {
     }
     pending_.ui_update_ctrl = false;
   }
+
+
+  // FIX: Making Geoms
+
+  // mjvGeom geom_arrow;
+  // geom_arrow.type=  mjGEOM_ARROW;
+  // geom_arrow.size[0]= 0; // Origin point of geom(?)
+  // geom_arrow.size[1]= 0;
+  // geom_arrow.size[2]= 0;
+  //
+  // geom_arrow.pos[0]= 0;
+  // geom_arrow.pos[1]= 0;
+  // geom_arrow.pos[2]= 0;
+  //
+  // geom_arrow.mat[0]= 0;
+  // geom_arrow.mat[1]= 0;
+  // geom_arrow.mat[2]= 0;
+  // geom_arrow.mat[3]= 0;
+  // geom_arrow.mat[4]= 0;
+  // geom_arrow.mat[5]= 0;
+  // geom_arrow.mat[6]= 0;
+  // geom_arrow.mat[7]= 0;
+  // geom_arrow.mat[8]= 0;
+  //
+  // geom_arrow.rgba[0]= 0;
+  // geom_arrow.rgba[1]= 1;
+  // geom_arrow.rgba[2]= 0;
+  // geom_arrow.rgba[3]= 1;
+  // mjtNum from[3];
+  // from[0] = 0;
+  // from[1] = 0;
+  // from[2] = 0;
+  // mjtNum to[3];
+  // to[0] = 1;
+  // to[1] = 1;
+  // to[2] = 1;
+  //
+  // mjv_initGeom(&geom_arrow, mjGEOM_ARROW, NULL, NULL, NULL, NULL);
+  // mjv_addGeoms(m_, d_, &opt, &pert, mjCAT_ALL, &scn);
+  // mjv_connector(&geom_arrow, mjGEOM_ARROW, 1, from, to);
+  // mjv_updateCamera(m_, d_, &cam, &scn);
+
 
   // render scene
   mjv_updateScene(this->m_, this->d_, &opt, &pert, &cam, mjCAT_ALL, &scn);
